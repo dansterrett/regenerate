@@ -1,3 +1,82 @@
 = Regenerate
 
-This project rocks and uses MIT-LICENSE.
+NOTE: This is in development. This README specifies the functionality that we want to build for Regenerate. To date, a gem has not been released.
+
+
+When you started Rails, you saw generators and said "Wow, that's freaking awesome." Then you started building complex applications. Maybe there wasn't a 1 to 1 relationship between views and models, or maybe you started using Backbone.js or Ember.js and need to use JS templating such as EJS or Handlebars.
+
+Whatever the reason, scaffolding lost its luster. Until now.
+
+Regenerate wants you to fall in love with template generation again. Here is what we want to accomplish:
+
+* Template generators should be modifiable. (ie: you want Twitter Bootstrap specific generators)
+* Regenerate should allow you to have theme plugins 
+* You should be able to specify the format (ERB, EJS, Handlebars) of the resulting file
+* You should be able to specify the output path (put the template where you want it)
+* You should be able to create a model-less templates
+* You should be able to print the template to terminal to copy and paste where you want it
+
+== Installation
+
+  gem 'regenerate'
+
+== Templates
+
+By default, regenerate will create templates based the template format found within Rails. There are two ways to create your themes/templates. The first is to have the gem copy the templates to your application where you can modify them. The templates will be placed in app/regenerate
+
+  rails g regenerate:views
+  
+The second way is to create a gem that overrides the templates provided with the regenerate gem.
+
+
+== Scaffold Generation
+
+Much like standard Rails development, you should be able to create scaffold templates with the theme you've created
+
+  rails g regenerate:scaffold entry title:string body:text
+  
+Furthermore, you should be able to create the HTML model-less
+
+  rails g regenerate:scaffold entry title:string body:text --without-model
+  
+== Form Generation
+
+You should be able to generate forms individually, without having to create anything else
+
+  rails g regenerate:form entry title:string body:text
+  
+You should also be able to generate the form without a model
+
+  rails g regenerate:form entry title:string body:text --without-model
+
+You should also be able to generate the form in EJS or Handlebars. When generating with a JS specific template, the model will not be generated.
+
+  rails g regenerate:form entry title:string body:text --handlebars
+  
+== Listing Generation
+
+You should be able to generate listing pages individually without having to create anything else. You should be able to specify the columns you want in the template
+
+  rails g regenerate:listing entry title blog
+
+
+== Tests
+
+Regenerate has been tested using Cucumber. To run the tests, run the following command
+
+  cucumber
+
+== Found a bug?
+
+If you are having a problem with Regenerate, first look at the FAQs above. If you still cannot resolve it, please submit an issue here.
+
+http://github.com/entropillc/regenerate/issues
+
+== Change Log
+
+== License
+
+Copyright 2011 Entropi Software, LLC.
+
+Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+
