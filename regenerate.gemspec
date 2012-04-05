@@ -7,9 +7,9 @@ require "regenerate/version"
 Gem::Specification.new do |s|
   s.name        = "regenerate"
   s.version     = Regenerate::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
+  s.authors     = ["Dan Sterrett, Nicholas Watson"]
+  s.email       = ["dan@entropi.co"]
+  s.homepage    = "http://github.com/entropillc/regenerate"
   s.summary     = "TODO: Summary of Regenerate."
   s.description = "TODO: Description of Regenerate."
 
@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.1"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'cucumber'
 end
