@@ -1,2 +1,2 @@
-module Regenerate
-end
+require 'regenerate/version'
+require 'regenerate/engine'
