@@ -4,7 +4,7 @@ module Regenerate
   module Generators
     class Base < ::Rails::Generators::Base
       def self.source_root
-        @source = File.expand_path(File.join(File.dirname(__FILE__), '../../app/scaffold'))
+        @source = File.expand_path(File.join(File.dirname(__FILE__), 'regenerate/templates'))
       end      
     end
   
@@ -37,7 +37,7 @@ module Regenerate
         @skip_controller = options.skip_controller? || @isJS_template_language
         @template_file_ext = (options.handlebars ? "html" : "html.erb")
         @theme = "bootstrap"
-        @view_settings = YAML::load(File.open(Base.source_root + '/views/' + @theme + '/viewSettings.yaml'))
+        @view_settings = YAML::load(File.open(destination_path('app/scaffold/' + @theme + '/viewSettings.yaml')))
         
         args_for_c_m.each do |arg|
           if arg == '!'
@@ -89,6 +89,23 @@ module Regenerate
       
       private
       
+      # This method is the same as the Thor 'template' method, but instead of getting the source file
+      # from the regenerate app, it gets it from the app that uses the regenerate app. This allows the users
+      # of this gem to customize the view templates.
+      def view_template(source, *args, &block)
+        config = args.last.is_a?(Hash) ? args.pop : {}
+        destination = args.first || source.sub(/\.tt$/, '')
+  
+        source = File.expand_path(source.to_s)
+        context = instance_eval('binding')
+  
+        create_file destination, nil, config do
+          content = ERB.new(::File.binread(source), nil, '-', '@output_buffer').result(context)
+          content = block.call(content) if block
+          content
+        end
+      end
+      
       def create_controller
         unless @skip_controller
           
@@ -132,7 +149,7 @@ module Regenerate
         
         viewsToCreate.each do |view|
           if %w[new edit index show _form].include?(view)
-            template "views/" + @theme + "/" + view + ".html.erb", "app/views/#{plural_name}/" + view + "." + @template_file_ext
+            view_template "app/scaffold/" + @theme + "/" + view + ".html.erb", "app/views/#{plural_name}/" + view + "." + @template_file_ext
           end
         end
       end
@@ -164,7 +181,7 @@ module Regenerate
         when "erb"
           get_view_setting("form_field", [attribute_field_type, attribute_name, attribute_field_type])
         when "handlebars"
-          get_view_setting("form_" + attribute_field_type.to_s, [ singular_name + '_' + attribute_name.to_s, singular_name + '[' + attribute_field_type.to_s + ']' ] )
+          get_view_setting("form_" + attribute_field_type.to_s, [ singular_name + '_' + attribute_name.to_s, singular_name + '[' + attribute_field_type.to_s + ']', attribute_name.to_s ] )
         end
       end
       

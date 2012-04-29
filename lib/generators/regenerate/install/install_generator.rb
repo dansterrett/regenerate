@@ -7,13 +7,14 @@ module Regenerate
       desc "This generator installs Regenerate templates to the app/scaffold directory"
       
       def add_templates
-        #copy_file "../../../../../app/scaffold/bootstrap/show.html.erb", "app/scaffold/bootstrap/show.html.erb"
-        copy_file "themes/bootstrap/_form.html.erb", "app/scaffold/bootstrap/_form.html.erb"
-        copy_file "themes/bootstrap/edit.html.erb", "app/scaffold/bootstrap/edit.html.erb"
-        copy_file "themes/bootstrap/index.html.erb", "app/scaffold/bootstrap/index.html.erb"
-        copy_file "themes/bootstrap/new.html.erb", "app/scaffold/bootstrap/new.html.erb"
-        copy_file "themes/bootstrap/show.html.erb", "app/scaffold/bootstrap/show.html.erb"
-      end      
+        view_templates_path = File.expand_path(File.join(File.dirname(__FILE__), '../../../../app/scaffold'))
+        copy_file view_templates_path + "/bootstrap/_form.html.erb", "app/scaffold/bootstrap/_form.html.erb"
+        copy_file view_templates_path + "/bootstrap/edit.html.erb", "app/scaffold/bootstrap/edit.html.erb"
+        copy_file view_templates_path + "/bootstrap/index.html.erb", "app/scaffold/bootstrap/index.html.erb"
+        copy_file view_templates_path + "/bootstrap/new.html.erb", "app/scaffold/bootstrap/new.html.erb"
+        copy_file view_templates_path + "/bootstrap/show.html.erb", "app/scaffold/bootstrap/show.html.erb"
+        copy_file view_templates_path + "/bootstrap/viewSettings.yaml", "app/scaffold/bootstrap/viewSettings.yaml"
+      end
     end
   end
 end

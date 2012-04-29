@@ -23,9 +23,9 @@
   :form_start: <script id="%s-view-template" type="text/x-handlebars-template"><form accept-charset="UTF-8" class="form-horizontal" method="post" data-remote="true">
   :form_end: </form></script>
   :form_label: <label for="%s">%s</label>
-  :form_number_field: <input id="%s" name="%s" size="30" type="text" />
-  :form_text_field: <input id="%s" name="%s" size="30" type="text" />
-  :form_text_area: <textarea cols="40" id="%s" name="%s" rows="20"></textarea>
+  :form_number_field: ! '<input id="%s" name="%s" size="30" type="text" value="{{%s}}" />'
+  :form_text_field: ! '<input id="%s" name="%s" size="30" type="text" value="{{%s}}" />'
+  :form_text_area: ! '<textarea cols="40" id="%s" name="%s" rows="20">{{%s}}</textarea>'
   :form_submit: <input class="btn btn-primary" name="commit" type="submit" value="Save" />
   :form_cancel_link: <input class="btn" name="cancel" type="button" value="Cancel" />
   :legend_inner: New/Edit
