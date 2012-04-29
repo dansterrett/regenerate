@@ -1,0 +1,45 @@
+# Note: if a value has %s, then all other '%' must be escaped with an additional '%',
+# so when the string method '%' is called on it, we won't ge a parse error.
+---
+:erb:
+  :form_start: <%%= form_for @%s, :html => { :class => "form-horizontal" } do |f| %%>
+  :form_end: <% end %>
+  :form_label: <%%= f.label :%s, :class => 'control-label' %%>
+  :form_field: <%%= f.%s :%s, :class => '%s' %%>
+  :form_submit: <%= f.submit nil, :class => 'btn btn-primary' %>
+  :form_cancel_link: <%%= link_to 'Cancel', %s, :class => 'btn' %%>
+  :legend_inner: <%= form_action_title %>
+  :attribute_value: <%%= %s%s.%s %%>
+  :new_link: <%%= link_to "New %s", %s, :class => 'btn btn-primary' %%>
+  :show_link: <%%= link_to "Show", %s, :class => 'btn btn-mini btn-primary' %%>
+  :edit_link_for_show_view: <%%= link_to "Edit", %s, :class => 'btn' %%>
+  :edit_link_for_index_view: <%%= link_to "Edit", %s, :class => 'btn btn-mini' %%>
+  :delete_link_for_show_view: <%%= link_to "Delete", %s, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger' %%>
+  :delete_link_for_index_view: <%%= link_to "Delete", %s, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger' %%>
+  :view_listing_link: <%%= link_to "View All", %s, :class => 'btn' %%>
+  :models_loop_start: <%% @%s.each do |%s| %%>
+  :loop_end: <% end %>
+:handlebars:
+  :form_start: <script id="%s-view-template" type="text/x-handlebars-template"><form accept-charset="UTF-8" class="form-horizontal" method="post" data-remote="true">
+  :form_end: </form></script>
+  :form_label: <label for="%s">%s</label>
+  :form_number_field: <input id="%s" name="%s" size="30" type="text" />
+  :form_text_field: <input id="%s" name="%s" size="30" type="text" />
+  :form_text_area: <textarea cols="40" id="%s" name="%s" rows="20"></textarea>
+  :form_submit: <input class="btn btn-primary" name="commit" type="submit" value="Save" />
+  :form_cancel_link: <input class="btn" name="cancel" type="button" value="Cancel" />
+  :legend_inner: New/Edit
+  :show_start: <script id="%s-show-view-template" type="text/x-handlebars-template">
+  :show_end: </script>
+  :index_start: <script id="%s-index-view-template" type="text/x-handlebars-template">
+  :index_end: </script>
+  :attribute_value: ! '{{%s}}'
+  :new_link: <a href="/%s/new" class="btn btn-primary">New %s</a>
+  :show_link: ! '<a href="/%s/{{id}}">Show</a>'
+  :edit_link_for_show_view: ! '<a href="/%s/{{id}}/edit" class="btn">Edit</a>'
+  :edit_link_for_index_view: ! '<a href="/%s/{{id}}/edit" class="btn btn-mini">Edit</a>'
+  :delete_link_for_show_view: ! '<a href="/%s/{{id}}" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>'
+  :delete_link_for_index_view: ! '<a href="/%s/{{id}}" class="btn btn-mini btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>'
+  :view_listing_link: <a href="/%s" class="btn">View All</a>
+  :models_loop_start: ! '{{#each %s}}'
+  :loop_end: ! '{{/each}}'

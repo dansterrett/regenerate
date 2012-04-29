@@ -1,0 +1,17 @@
+<%= get_view_setting("form_start", singular_name) %>
+  <fieldset>
+    <legend><%= get_view_setting("legend_inner") %> <%= singular_name.titleize %></legend>
+    <%- model_attributes.each do |attribute| -%>
+    <div class="control-group">
+      <%= get_form_field_label(attribute.name) %>
+      <div class="controls">
+        <%= get_form_field(attribute.name, attribute.field_type) %>
+      </div>
+    </div>
+    <%- end -%>
+    <div class="form-actions">
+      <%= get_view_setting("form_submit")%>
+      <%= get_form_cancel_link %>
+    </div>
+  </fieldset>
+<%= get_view_setting("form_end") %>

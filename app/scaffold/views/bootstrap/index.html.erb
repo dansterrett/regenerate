@@ -1,0 +1,44 @@
+<%= get_index_start %>
+<h1><%= plural_name.titleize %></h1>
+<div class="well">
+	<table class="table table-striped">
+	  <thead>
+  	  <tr>
+  	  <%- model_attributes.each do |attribute| -%>
+  	    <th><%= attribute.human_name.titleize %></th>
+  	  <%- end -%>
+  		<%- if action? :show -%>
+        <th></th>
+      <%- end -%>
+      <%- if action? :edit -%>
+        <th></th>
+      <%- end -%>
+      <%- if action? :destroy -%>
+        <th></th>
+      <%- end -%>
+  	  </tr>
+  	</thead>
+  	<tbody>
+  	  <%= get_models_loop_start %>
+  	    <tr>
+  	    <%- model_attributes.each do |attribute| -%>
+  	      <td><%= get_attribute_value(attribute.name, "index") %></td>
+  	    <%- end -%>
+  	    <%- if action? :show -%>
+  	      <td><%= get_show_link %></td>
+  	    <%- end -%>
+  	    <%- if action? :edit -%>
+  	      <td><%= get_edit_link("index") %></td>
+  	    <%- end -%>
+  	    <%- if action? :destroy -%>
+  	      <td><%= get_delete_link("index") %></td>
+  	    <%- end -%>
+  	    </tr>
+  	  <%= get_view_setting("loop_end") %>
+  	</tbody>
+	</table>
+</div>
+<%- if action? :new -%>
+<p><%= get_new_link %></p>
+<%- end -%>
+<%= get_show_end %>

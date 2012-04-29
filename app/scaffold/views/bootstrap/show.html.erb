@@ -1,0 +1,22 @@
+<%= get_show_start %>
+<h1><%= singular_name.titleize %> Details</h1>
+<div class="well">
+  <%- model_attributes.each do |attribute| -%>
+  <p>
+    <strong><%= attribute.human_name.titleize %>:</strong>
+	  <%= get_attribute_value(attribute.name, "show") %>
+  </p>
+  <% end -%>
+</div>
+<p>
+<%- if action? :edit -%>
+  <%= get_edit_link("show") %> |
+<%- end -%>
+<%- if action? :destroy -%>
+  <%= get_delete_link("show") %> |
+<%- end -%>
+<%- if action? :index -%>
+  <%= get_view_listing_link %>
+<%- end -%>
+</p>
+<%= get_show_end %>
