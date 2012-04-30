@@ -68,3 +68,7 @@ end
 Then /^I should see "([^\"]*)" when running "([^\"]*)"$/ do |expected_response, command|
   `cd #{@current_directory} && #{command}`.should include(expected_response)
 end
+
+Given /^an existing rails app$/ do
+  
+end

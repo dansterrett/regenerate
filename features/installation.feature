@@ -4,7 +4,13 @@ Feature: Regenerate Installation Generator
   I want to install Regenerate
   
   Scenario: Installing Regenerate
-    Given a new Rails app
-    When I install regenerate
-    Then I should see all the template files
+    Given an existing rails app
+    When I run "rails g regenerate:install"
+    Then I should see the following files
+      | app/scaffold/bootstrap/_form.html.erb    |
+      | app/scaffold/bootstrap/edit.html.erb     |
+      | app/scaffold/bootstrap/index.html.erb    |
+      | app/scaffold/bootstrap/new.html.erb      |
+      | app/scaffold/bootstrap/show.html.erb     |
+      | app/scaffold/bootstrap/viewSettings.yaml |
     
